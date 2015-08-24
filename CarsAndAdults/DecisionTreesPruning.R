@@ -1,0 +1,21 @@
+library("rpart")
+library("rattle")
+
+ad_data<-read.csv("adult-prune.csv")
+adult_data<-as.data.frame(ad_data)
+adult_tree<- rpart(Salary~adult_data$Age+adult_data$WorkClass+adult_data$Education+adult_data$MartialStatus+adult_data$Occupation+adult_data$Service+adult_data$Race+adult_data$Sex+adult_data$Gain+adult_data$Loss+adult_data$Hours+adult_data$Country, data=adult_data, method='class')
+fancyRpartPlot(adult_tree, main="Unpruned Adult dataset's Classification Tree")
+printcp(adult_tree)
+plotcp(adult_tree, main = "Plot of cp values for Adult dataset")
+adult_ptree<- prune(adult_tree, cp= adult_tree$cptable[which.min(adult_tree$cptable[,"xerror"]),"CP"])
+fancyRpartPlot(adult_ptree, uniform=TRUE, main="Pruned Adult dataset's Classification Tree")
+
+
+cr_data<-read.csv("cars-prune.csv")
+car_data<-as.data.frame(cr_data)
+car_tree<- rpart(Rating~car_data$Buy+car_data$Maintenance+car_data$Doors+car_data$Persons+car_data$Boot+car_data$Safety, data=car_data, method='class')
+fancyRpartPlot(car_tree, main="Unpruned Car dataset's Classification Tree")
+printcp(car_tree)
+plotcp(car_tree, main = "Plot of cp values for Car dataset")
+car_ptree<- prune(car_tree, cp= car_tree$cptable[which.min(car_tree$cptable[,"xerror"]),"CP"])
+fancyRpartPlot(car_ptree, uniform=TRUE, main="Pruned Car dataset's Classification Tree")
