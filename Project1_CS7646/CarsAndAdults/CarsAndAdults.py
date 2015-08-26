@@ -204,7 +204,7 @@ def EvaluateEnsembleBoosting(training_data, Input_features, Output_feature, data
 
 	accuracy = float(accuracy) / len(predictions)
 
-	print("Accuracy with GradientBoostingClassifier : TrainingSet:" + str(accuracy))
+	print("Accuracy with GradientBoostingClassifier : CrossValidation Set:" + str(accuracy))
 
 def EvaluateArtificialNeuralNetwork(training_data, Input_features, Output_feature, NUMBER_CLASSES, HIDDEN_NEURONS, NUMBER_LAYERS, dataset_name, ParameterVal):
 
@@ -320,7 +320,7 @@ def PerforMetricsOnThisAlgorithm(alg, training_data, Input_features, Output_feat
 
 	Scores = cross_validation.cross_val_score(alg, training_data[Input_features], training_data[Output_feature], cv=3)
 
-	print("Accuracy with " + AlgorithmName + " : TrainingSet:" + str(Scores.mean()))
+	print("Accuracy with " + AlgorithmName + " : CrossValidation :" + str(Scores.mean()))
 
 	#alg.fit(training_data[Input_features], training_data[Output_feature])
 	#predictions = alg.predict(adult_test[features])
@@ -329,16 +329,15 @@ if __name__ == "__main__":
 	Initiate_CarsAndAdults()
 
 '''******RESULTS OF DIFFERENT ALGORITHMS FOR ADULT DATASET*******
-Accuracy with DecisionTrees : TrainingSet:0.844870999079
-Accuracy with KNearestNeighbor : TrainingSet:0.818911327014
-Accuracy with GradientBoostingClassifier : TrainingSet:0.837875472449
-Accuracy with SupportVectorMachine : TrainingSet:0.828426598014
-Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.783794536292  TestSet:0.776657824934
-
+Accuracy with DecisionTrees : CrossValidation :0.845169384485
+Accuracy with KNearestNeighbor : CrossValidation :0.818911327014
+Accuracy with GradientBoostingClassifier : CrossValidation Set:0.837875472449
+Accuracy with SupportVectorMachine : CrossValidation :0.828426598014
+Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.780877022368  TestSet:0.7824933687
 ******RESULTS OF DIFFERENT ALGORITHMS FOR CARS DATASET*******
-Accuracy with DecisionTrees : TrainingSet:0.793389334723
-Accuracy with KNearestNeighbor : TrainingSet:0.779451119749
-Accuracy with GradientBoostingClassifier : TrainingSet:0.821759259259
-Accuracy with SupportVectorMachine : TrainingSet:0.771903792591
-Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.849537037037  TestSet:0.851851851852'''
+Accuracy with DecisionTrees : CrossValidation :0.796277838478
+Accuracy with KNearestNeighbor : CrossValidation :0.779451119749
+Accuracy with GradientBoostingClassifier : CrossValidation Set:0.821759259259
+Accuracy with SupportVectorMachine : CrossValidation :0.771903792591
+Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.831018518519  TestSet:0.8125'''
 
