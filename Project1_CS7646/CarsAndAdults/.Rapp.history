@@ -1,0 +1,4 @@
+library("rpart")#
+data<-read.csv("adult-prune.csv")#
+str(data)
+ls
