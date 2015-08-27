@@ -26,7 +26,7 @@ from pybrain.structure           import FullConnection
 def Initiate_CarsAndAdults():
 	adult_train = pandas.read_csv("adult-data.csv")
 	unformatted_adult_train = adult_train
-	Input_adult_features            = ['WorkClass', 'Occupation', 'Service', 'Race', 'Sex', 'Gain', 'Loss', 'Hours', 'Country']
+	Input_adult_features            = ['Age', 'WorkClass', 'Education','MartialStatus','Occupation', 'Service', 'Race', 'Sex', 'Gain', 'Loss', 'Hours', 'Country']
 	Output_adult_feature            = "Salary"
 	ConvertToBinaryAdultColumnNames = ['WorkClass', 'MartialStatus', 'Occupation', 'Service', 'Race', 'Sex', 'Country', 'Salary']
 	NormalizationColAdult           = ['Age', 'Education', 'Gain', 'Loss', 'Hours']
