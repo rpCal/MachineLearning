@@ -51,7 +51,7 @@ def Initiate_CarsAndAdults():
 	EvaluateDecisionTrees(adult_train, Input_adult_features, Output_adult_feature, "Adults Dataset : Decision Tree", ParameterVal = 50)
 	EvaluateKNearestNeighbor(adult_train, Input_adult_features, Output_adult_feature, "Adults Dataset : K-Nearest Neighbor", ParameterVal = 40)
 	EvaluateEnsembleBoosting(adult_train, Input_adult_features, Output_adult_feature, "Adults Dataset : Gradient Bossting", ParameterVal = 40)
-	EvaluateSupportVectorMachine(adult_train, Input_adult_features, Output_adult_feature, "Adults Dataset : Support Vector Machine", ParameterVal = 5)
+	EvaluateSupportVectorMachine(adult_train, Input_adult_features, Output_adult_feature, "Adults Dataset : Support Vector Machine", ParameterVal = 20)
 	EvaluateArtificialNeuralNetwork(adult_train, Input_adult_features, Output_adult_feature, NUMBER_CLASSES = 2, HIDDEN_NEURONS = 5, NUMBER_LAYERS = 2 , dataset_name = "Adults Dataset :  Artificial Neural Network", ParameterVal = 100)
 
 	print "******RESULTS OF DIFFERENT ALGORITHMS FOR CARS DATASET*******"
@@ -154,6 +154,7 @@ def EvaluateSupportVectorMachine(training_data, Input_features, Output_feature, 
 	test_error = []
 
 	for  PenaltyParam in PenaltyParams:
+		print "iteration :", PenaltyParam
 		model = svm.SVC(C=PenaltyParam, kernel='poly').fit(X_train, Y_train)
 		training_error.append(MSE(model.predict(X_train), Y_train))
 		test_error.append(MSE(model.predict(X_test), Y_test))
@@ -174,7 +175,7 @@ def EvaluateEnsembleBoosting(training_data, Input_features, Output_feature, data
 
 	PlotErrors(tot_estimators, training_error, test_error, dataset_name, "Number of Estimators", "Mean Square Error")'''
 
-	algorithms = [[GradientBoostingClassifier(random_state=1, n_estimators=100, max_depth=15), Input_features], [DecisionTreeClassifier(random_state=1), Input_features]]
+	algorithms = [[GradientBoostingClassifier(random_state=1, n_estimators=100, max_depth=15), Input_features], [DecisionTreeClassifier(random_state=1, max_depth=15), Input_features]]
 
 	kf = KFold(training_data.shape[0], n_folds=3, random_state=1)
 
@@ -329,15 +330,14 @@ if __name__ == "__main__":
 	Initiate_CarsAndAdults()
 
 '''******RESULTS OF DIFFERENT ALGORITHMS FOR ADULT DATASET*******
-Accuracy with DecisionTrees : CrossValidation :0.845169384485
-Accuracy with KNearestNeighbor : CrossValidation :0.818911327014
-Accuracy with GradientBoostingClassifier : CrossValidation Set:0.837875472449
-Accuracy with SupportVectorMachine : CrossValidation :0.828426598014
-Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.780877022368  TestSet:0.7824933687
+Accuracy with DecisionTrees : CrossValidation :0.840892829279
+Accuracy with KNearestNeighbor : CrossValidation :0.831609509774
+Accuracy with GradientBoostingClassifier : CrossValidation Set:0.842981234666
+Accuracy with SupportVectorMachine : CrossValidation :0.843180245164
+Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.809477499779  TestSet:0.810344827586
 ******RESULTS OF DIFFERENT ALGORITHMS FOR CARS DATASET*******
-Accuracy with DecisionTrees : CrossValidation :0.796277838478
+Accuracy with DecisionTrees : CrossValidation :0.796857548623
 Accuracy with KNearestNeighbor : CrossValidation :0.779451119749
 Accuracy with GradientBoostingClassifier : CrossValidation Set:0.821759259259
 Accuracy with SupportVectorMachine : CrossValidation :0.771903792591
-Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.831018518519  TestSet:0.8125'''
-
+Accuracy with Artificial Neural Network: epoch: 4  TrainingSet:0.860339506173  TestSet:0.854166666667'''
